@@ -13,11 +13,9 @@ class NodeForm(FlaskForm):
     #         raise ValidationError('Cannot find destination node: ' + destination_to_check.data)
 
     origin = SelectField('Origin',
-                         coerce=int,
-                         validators=InputRequired())
+                         coerce=int)
     destination = SelectField('Destination',
-                              coerce=int,
-                              validators=InputRequired())
+                              coerce=int)
     submit = SubmitField(label='Go')
 
     def __init__(self, nodes=None):

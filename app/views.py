@@ -14,7 +14,7 @@ home = Blueprint('home', __name__)
 def home_page():
     form = NodeForm(nodes=db.session.execute(db.select(Node).all()))
 
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST' and form.is_submitted():
         origin_node = db.get_or_404(Node, form.origin.data)
         destination_node = db.get_or_404(Node, form.destination.data)
 

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <body>
+        <div class="container">
+            <form method="POST" class="form-register" style="color:white">
+                {{ form.hidden_tag() }}
+                {{ form.origin(class="form-group col-md-5", placeholder=form.origin.label()) }}
+                {{ form.destination(class="form-group col-md-5", placeholder=form.destination.label()) }}
+                {{ form.submit(class="btn btn-primary col-md-2")  }}
+            </form>
+        </div>
+
+        <div>
+            {% include 'map.html' %}
+        </div>
+    </body>
+{% endblock %}

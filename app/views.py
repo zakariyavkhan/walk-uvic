@@ -1,17 +1,13 @@
 import networkx, osmnx, folium
 from . import db
-from flask import (
-    render_template,
-    flash,
-    request,
-    Blueprint)
+from flask import (render_template, flash, request, Blueprint)
 from .forms import NodeForm
 from .models import Node
 
-home = Blueprint('home', __name__)
+index = Blueprint('index', __name__)
 
-@home.route('/', methods=['GET', 'POST'])
-def home_page():
+@index.route('/', methods=['GET', 'POST'])
+def index():
     form = NodeForm(nodes=db.session.execute(db.select(Node).all()))
 
     if request.method == 'POST' and form.is_submitted():
@@ -41,4 +37,4 @@ def home_page():
         for err_msg in form.errors.values():
             flash(f'error {err_msg}', category='danger')
 
-    return render_template('home.html', form=form)
+    return render_template('index.html', form=form)

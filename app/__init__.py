@@ -9,9 +9,6 @@ def create_app():
     app.config['SECRET_KEY']='dev'
     app.config['SQLALCHEMY_DATABASE_URI']='sqlite://'
 
-    from .views import home
-    app.register_blueprint(home)
-
     from .models import Node
     with app.app_context():
         db.init_app(app)
@@ -20,8 +17,11 @@ def create_app():
     with open('app/nodes.csv') as csvfile:
         for line in csv.reader(csvfile, delimiter=','):
             with app.app_context():
-                db.session.add(Node(id=line[0], name=line[1]))
+                db.session.add(Node(name=line[0], id=line[1]))
                 db.session.commit()
+
+    from .views import home
+    app.register_blueprint(home)
 
     folium.Map(location=[48.463198, -123.311886], 
                zoom_start=17) \

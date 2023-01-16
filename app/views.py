@@ -3,12 +3,15 @@ from . import db
 from flask import (render_template, flash, request, Blueprint)
 from .forms import NodeForm
 from .models import Node
+from sqlalchemy.sql import select
 
-index = Blueprint('index', __name__)
+home = Blueprint('home', __name__)
 
-@index.route('/', methods=['GET', 'POST'])
+@home.route('/', methods=['GET', 'POST'])
 def index():
-    form = NodeForm(nodes=db.session.execute(db.select(Node).all()))
+    #with app.app_context():
+    form = NodeForm(nodes= \
+        db.session.scalars(select(Node)).all())
 
     if request.method == 'POST' and form.is_submitted():
         origin_node = db.get_or_404(Node, form.origin.data)
@@ -37,4 +40,4 @@ def index():
         for err_msg in form.errors.values():
             flash(f'error {err_msg}', category='danger')
 
-    return render_template('index.html', form=form)
+    return render_template('home.html', form=form)

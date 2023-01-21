@@ -1,6 +1,6 @@
 import networkx, osmnx, folium
 from . import db
-from flask import (render_template, flash, request, Blueprint)
+from flask import (render_template, Blueprint, request, flash)
 from .forms import NodeForm
 from .models import Node
 from sqlalchemy.sql import select
@@ -9,8 +9,7 @@ home = Blueprint('home', __name__)
 
 @home.route('/', methods=['GET', 'POST'])
 def index():
-    #with app.app_context():
-    form = NodeForm(nodes= \
+    form = NodeForm(nodes = \
         db.session.scalars(select(Node)).all())
 
     if request.method == 'POST' and form.is_submitted():
@@ -21,23 +20,16 @@ def index():
                                   48.4602000,
                                   -123.3077000,
                                   -123.3165000,
-                                  network_type="walk",
+                                  network_type='walk',
                                   retain_all=False)
 
-        route = networkx.shortest_path(G, 
-                                       origin_node.id, 
+        route = networkx.shortest_path(G, origin_node.id, 
                                        destination_node.id, 
                                        weight='length')
 
-        osmnx.plot_route_folium(G, 
-                                route=route, 
+        osmnx.plot_route_folium(G, route=route, 
                                 route_map = \
                                     folium.Map(location=[48.463198, -123.311886], 
-                                               zoom_start=17)
-                                ).save('templates/map.html')
-
-    if form.errors != {}:
-        for err_msg in form.errors.values():
-            flash(f'error {err_msg}', category='danger')
+                                               zoom_start=17)).save('app/templates/map.html')
 
     return render_template('home.html', form=form)

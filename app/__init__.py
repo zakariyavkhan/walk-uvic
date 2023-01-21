@@ -27,4 +27,5 @@ def create_app():
                zoom_start=17) \
                .save('app/templates/map.html')
 
+
     return app

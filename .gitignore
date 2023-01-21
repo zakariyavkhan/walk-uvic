@@ -1,2 +1,5 @@
 app/__pycache__
-instance
+instance/
+cache/
+*.ipynb
+app/templates/map.html

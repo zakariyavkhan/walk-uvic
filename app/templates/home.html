@@ -6,14 +6,24 @@
 
 {% block content %}
     <body>
-        <div class="container">
-            <form method="POST" class="form-register" style="color:white">
-                {{ form.hidden_tag() }}
-                {{ form.origin(class="form-group col-md-5", placeholder=form.origin.label()) }}
-                {{ form.destination(class="form-group col-md-5", placeholder=form.destination.label()) }}
-                {{ form.submit(class="btn btn-primary col-md-2")  }}
-            </form>
-        </div>        
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="container">
+                <div class="row">
+                    <p class="col">From:</p>
+                    <div class="col">
+                        {{ form.origin(class="form-select") }}
+                    </div>
+                    <p class="col">To:</p>
+                    <div class="col">
+                        {{ form.destination(class="form-select") }}
+                    </div>
+                    <div class="col d-md-block">
+                        {{ form.submit(class="btn btn-primary")  }}                        
+                    </div>
+                </div>
+            </div>
+        </form>
     </body>
 
 {% endblock %}

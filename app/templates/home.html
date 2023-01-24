@@ -8,19 +8,24 @@
     <body>
         <form method="POST">
             {{ form.hidden_tag() }}
+
             <div class="container">
                 <div class="row">
-                    <p class="col">From:</p>
-                    <div class="col">
-                        {{ form.origin(class="form-select") }}
-                    </div>
-                    <p class="col">To:</p>
-                    <div class="col">
-                        {{ form.destination(class="form-select") }}
-                    </div>
-                    <div class="col d-md-block">
-                        {{ form.submit(class="btn btn-primary")  }}                        
-                    </div>
+
+                        <label class="col">From:</label>
+                        <div class="col">
+                            {{ form.origin(class="form-select") }}
+                        </div>
+
+                        <label class="col">To:</label>
+                        <div class="col">
+                            {{ form.destination(class="form-select") }}
+                        </div>
+
+                        <div class="col d-md-block">
+                            {{ form.submit(class="btn btn-primary")  }}                        
+                        </div>    
+
                 </div>
             </div>
         </form>

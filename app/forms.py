@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, SubmitField
 
 class NodeForm(FlaskForm):
+    # searchfield?
     origin = SelectField('Origin')
     destination = SelectField('Destination')
     submit = SubmitField(label='Go')

@@ -3,3 +3,4 @@ instance/
 cache/
 *.ipynb
 app/templates/map.html
+*.osm

@@ -29,7 +29,7 @@ def index():
 
         osmnx.plot_route_folium(G, route=route, 
                                 route_map = \
-                                    folium.Map(location=[48.463198, -123.311886], 
-                                               zoom_start=18)).save('app/templates/map.html')
+                                folium.Map(location=[48.463198, -123.311886], 
+                                            zoom_start=18)).save('app/templates/map.html')
 
     return render_template('home.html', form=form)
